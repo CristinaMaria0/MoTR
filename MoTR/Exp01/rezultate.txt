@@ -1,0 +1,13 @@
+pearsonr (reading time, frequency) = -0.49689602847046843, pvalue=0.0000
+
+PearsonR (complexity, reading time):
+    Pearson correlation coefficient (victor): 0.2804, p-value: 0.0000
+    Pearson correlation coefficient (iulia): 0.1758, p-value: 0.0002
+    Pearson correlation coefficient (petru): 0.2508, p-value: 0.0000
+    Pearson correlation coefficient (stadio88): 0.2791, p-value: 0.0000
+    Pearson correlation coefficient (user): 0.1975, p-value: 0.0000
+    Pearson correlation coefficient (sergiu): 0.2886, p-value: 0.0000
+
+PearsonR (avarege_complexity, reading time):
+a) toti adnotatorii : Pearson correlation coefficient: 0.2897, p-value: 0
+b) toti mai putin user+iulia: Pearson correlation coefficient: 0.3144, p-value: 0
