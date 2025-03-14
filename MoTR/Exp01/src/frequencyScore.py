@@ -20,7 +20,7 @@ complexity_mapping = {
 csv_file_path = r"..\outputs\totalReadingTimeCuvinte_fromExp01.csv"
 
 csv_frequency_score = r"..\outputs\frequencyScore.csv"
-
+csv_sentence_word_complexity = r"..\outputs\sentenceWordComplexity.csv"
 csv_files = [
     r"..\adnotari_complexitate\victor.csv",
     r"..\adnotari_complexitate\iulia.csv",
@@ -127,6 +127,6 @@ for (sentence, word), data in propozitie_target.items():
         average_sentence_word_complexity.append({"sentence": sentence, "word": word, "average_complexity": avg_complexity,'total_reading_time':reading_time})
 
 df_avg_sentence_word_complexity = pd.DataFrame(average_sentence_word_complexity)
-df_avg_sentence_word_complexity.to_csv('average_sentence_word_complexity.csv', index=False)
+df_avg_sentence_word_complexity.to_csv(csv_sentence_word_complexity, index=False)
 correlation, p_value = stats.pearsonr(df_avg_sentence_word_complexity["average_complexity"], df_avg_sentence_word_complexity["total_reading_time"])
 print(f"Pearson correlation coefficient: {correlation:.4f}, p-value: {p_value:.4f}")
