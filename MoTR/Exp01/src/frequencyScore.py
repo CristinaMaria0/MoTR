@@ -73,8 +73,7 @@ for combination in all_combinations:
         frequency_df['FrequencyScore'] = pd.to_numeric(frequency_df['FrequencyScore'], errors='coerce')
 
         # Drop NaN values that might have been introduced during conversion
-        # frequency_df.dropna(subset=['totalReadingTime', 'FrequencyScore'], inplace=True)
-
+       
         adnotare_data = pd.read_csv(adnotare_complexitate_path, names=['word', 'label', 'text'])
         adnotare_data['complexity'] = adnotare_data['label'].map(lambda x: complexity_mapping.get(str(x).strip().lower(), None))
 
@@ -96,7 +95,7 @@ for combination in all_combinations:
             sentence_df = pd.DataFrame(current_sentence, columns=['Word', 'FrequencyScore', 'totalReadingTime'])
             propozitii_csv.append(sentence_df)
         # verifică primele propoziții
-        # print(propozitii_csv[:5])
+        # print(propozitii_csv[:2])
 
         reading_times_per_user = []
         complexities_per_user = []
@@ -119,11 +118,12 @@ for combination in all_combinations:
                     key = (sentence_cleaned, word)
                     if key in propozitie_target:
                         propozitie_target[key]["total_complexity"]+=complexity
+                        propozitie_target[key]["total_reading_time"]+=reading_time
                         propozitie_target[key]["count"]+=1
                     else:
-                        propozitie_target[key] = {"total_complexity": complexity, "count": 1}
+                        propozitie_target[key] = {"total_complexity": complexity, "count": 1, "total_reading_time": reading_time}
 
-                    propozitie_target[key]["total_reading_time"] = reading_time
+                    # propozitie_target[key]["total_reading_time"] = reading_time
 
 
         # Calculez Pearson correlation
@@ -135,7 +135,7 @@ for combination in all_combinations:
     average_sentence_word_complexity = []
     for (sentence, word), data in propozitie_target.items():
             avg_complexity = data["total_complexity"] / data["count"]
-            reading_time = data["total_reading_time"]
+            reading_time = data["total_reading_time"] / data["count"]
             average_sentence_word_complexity.append({"sentence": sentence, "word": word, "average_complexity": avg_complexity,'total_reading_time':reading_time})
 
     df_avg_sentence_word_complexity = pd.DataFrame(average_sentence_word_complexity)
