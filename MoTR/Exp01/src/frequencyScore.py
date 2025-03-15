@@ -49,7 +49,7 @@ min_correlation = 1
 max_combination = None
 min_combination = None
 all_combinations = []
-for r in range(2, len(csv_files) + 1):  # De la 1 la numărul total de elemente
+for r in range(1, len(csv_files) + 1):  # De la 1 la numărul total de elemente
     all_combinations.extend(itertools.combinations(csv_files, r))
 
 for combination in all_combinations:
@@ -106,7 +106,7 @@ for combination in all_combinations:
             word = row['word']
             complexity = row['complexity']
             sentence = row["text"]
-            match_df = gaseste_propozitie_similara_corecta(word, propozitii_csv)
+            match_df = gaseste_propozitie_similara_corecta(sentence, propozitii_csv)
             
             if match_df is not None:
                 matched_row = match_df[match_df['Word'].str.lower() == word.lower()]
