@@ -144,9 +144,9 @@ for combination in all_combinations:
     print(f"{correlation:.4f}, p-value: {p_value:.4f}")
     if correlation > max_correlation:
         max_correlation = correlation
-        max_combination = combination
+        max_combination = users
     if correlation < min_correlation:
         min_correlation = correlation
-        min_combination = combination
+        min_combination = users
 print(f"Max correlation: {max_correlation} for combination: {max_combination}")
 print(f"Min correlation: {min_correlation} for combination: {min_combination}")
