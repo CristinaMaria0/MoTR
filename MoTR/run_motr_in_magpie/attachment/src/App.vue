@@ -4,107 +4,88 @@
 <template>
   <Experiment title="Mouse tracking for Reading" translate="no">
 
-    <Screen :title="'Welcome'" class="instructions" :validations="{
-        SubjectID: {
-          minLength: $magpie.v.minLength(2)
-        }
-      }">
-        <!-- <WelcomeScreen /> -->
+    <Screen :title="'Bun venit!'" class="instructions">
+          <!-- <WelcomeScreen /> -->
         <div style="width: 40em; margin: auto;">
 
         <div style="background-color: lightgrey; padding: 10px;">
-            <b> Information About this Study </b>
+            <b> Informații despre studiu </b>
         </div>
-        <p>
-          We would like to ask you if you are willing to participate in our research project. Your participation is voluntary. Please read the text below carefully and ask the conducting person about anything you do not understand or would like to know.
-        <br><br>
-          <b>What is investigated and how?</b> You are being asked to take part in a research study being done by Ethan Wilcox, a researcher at the Swiss Federal Institute of Technology. This study will help us learn about how people read. It will take you around 20 minutes to complete.
-        <br><br>
-          <b>Who can participate?</b> You can participate only if you are an adult native speaker of English.
-        <br><br>
-         <b>What am I supposed to do as a participant?</b> If you choose to be in the study, you will use the computer mouse to read sentences in English and answer questions about them.
-        <br><br>
-          <b>What are my rights during participation?</b> Your participation in this study is voluntary. If you choose to participate, you may change your mind and leave the study at any time by closing the web page without specifying reasons and without any disadvantages.
-        <br><br>
-          <b>What risks and benefits can I expect?</b> There are no foreseeable risks for participating in this study.
-        <br><br>
-          <b>Will I be compensated for participating?</b> If you participate you will be compensated for your time following the amount specified on prolific.co.
-        <br><br>
-          <b>What data is collected from me and how is it used?</b> During this study, we will track the position of your mouse on screen. The data from this study may be presented at scientific conferences and published in scientific journals, as well as in online repositories. All data will remain anonymous. Members of the ETH Zurich Ethics Commission may access the original data for examination purposes. Strict confidentiality will be observed at any time.
-        <br><br>
-          <b> What are my rights to my personal data? </b> You can request information about the personal data collected from you at any time and without giving reasons. You can also request that it be rectified, handed over to you, barred for processing or erased. To do so, please contact the person indicated below.
-        <br><br>
-          <b>Who funds this study?</b> This study is funded by an ETH Postdoctoral Fellowship grant, awarded to Ethan Wilcox.
-        <br><br>
-          <b> How am I insured? </b> Although there are no foreseeable risks for participation, any adverse health effects that are directly caused by a study and can be demonstrated to be attributable to fault on the part of the project team or ETH Zurich are covered by ETH's liability insurance.
-        <br><br>
-          <b> Who reviewed this study?  </b> This study was examined by the ETH Zurich Ethics Commission as proposal EK 2023-N-03
+        <p>  Dorim să vă întrebăm dacă sunteți dispus să participați la proiectul nostru de cercetare. Participarea dumneavoastră este voluntară. Vă rugăm să citiți cu atenție textul de mai jos și să întrebați persoana care conduce studiul despre orice nu înțelegeți sau doriți să aflați.
+  <br><br>
+  <b>Ce este investigat și cum?</b> Acest studiu ne va ajuta să învățăm despre modul în care oamenii citesc. Va dura aproximativ 20 de minute pentru a fi finalizat.
 
-        <br><br>
-          <b> Complaints Office:</b> The secretariat of the ETH Zurich Ethics Committee is available to help you with complaints in connection with your participation. Contact: ethics@sl.ethz.ch or 0041 44 632 85 72.
-        <br><br>
-          <b> General Contact: </b> Ethan Gotlieb Wilcox, Department of Computer Science, ETH Zurich, OAS K.20, Binzmühlestrasse 13, 8050 Zürich, Switzerland, ethan.wilcox@inf.ethz.ch <br>
-        </p>
+  <b>Ce trebuie să fac în calitate de participant?</b> Dacă alegeți să participați la studiu, veți folosi mouse-ul computerului pentru a citi propoziții în limba engleză și pentru a răspunde la întrebări despre acestea.
 
-        <br>
-        <div style="background-color: lightgrey; padding: 10px;">
-            <b> Consent Form </b>
-        </div>
-        <br>
-        I, the participant, confirm by clicking the button below: <br>
-        <div style="padding-left: 30px"> • I have read and understood the study information. My questions have been answered completely and to my satisfaction. </div>
-        <div style="padding-left: 30px">• I comply with the inclusion and exclusion criteria for participation described above. I am aware of the requirements and restrictions to be observed during the study. </div>
-        <div style="padding-left: 30px">• I have had enough time to decide about my participation. </div>
-        <div style="padding-left: 30px">• I participate in this study voluntarily and consent that my personal data be used as described above.</div>
-        <div style="padding-left: 30px">• I understand that I can stop participating at any moment.</div>
-        <br>
+  <b>Cine a revizuit acest studiu?</b> Acest studiu a fost examinat de studenți ai Departamentului de Informatică de la Universitatea din București.
 
-          <tr>
-          <td>Please enter your Worker ID to continue:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
-          </tr>
-          <!-- <tr>
-          </tr> -->
-          </div>
-          <div v-if="
-            $magpie.measurements.SubjectID&&
-            !$magpie.validateMeasurements.SubjectID.$invalid
-            ">
-          <br> By clicking on the button below you consent to participating in this study: <br><br>
-          <br />
-          <button 
-            @click="$magpie.addExpData({ SubjectId: $magpie.measurements.SubjectID}); $magpie.nextScreen()">
-            Proceed
-          </button>
+  <br>
+  <div style="background-color: lightgrey; padding: 10px;">
+    <b>Formular de Consimțământ</b>
+  </div>
+  <br>  Eu, participantul, confirm prin apăsarea butonului de mai jos: <br>
+  <div style="padding-left: 30px">• Am citit și am înțeles informațiile despre studiu. Întrebările mele au primit răspuns complet și satisfăcător.</div>
+  <div style="padding-left: 30px">• Mă conformez criteriilor de includere și excludere pentru participare descrise mai sus. Sunt conștient de cerințele și restricțiile care trebuie respectate în timpul studiului.</div>
+  <div style="padding-left: 30px">• Am avut suficient timp pentru a decide asupra participării mele.</div>
+  <div style="padding-left: 30px">• Particip la acest studiu în mod voluntar și sunt de acord ca datele mele personale să fie utilizate conform descrierii de mai sus.</div>
+  <div style="padding-left: 30px">• Înțeleg că pot înceta participarea în orice moment.</div>
+  <br>
 
-          </div>
-        </Screen>
+  <br> Apăsând butonul de mai jos, vă exprimați consimțământul pentru participarea la acest studiu: <br><br>
+  <br />
+  <button 
+    @click="$magpie.nextScreen()">
+    Continuă
+  </button>
+</p>
+</div>
+</Screen>
 
 
-    <InstructionScreen :title="'Instruction'">
+  
+<InstructionScreen :title="'Instrucțiuni'">
 <!-- 
-      <p>Please use the "Fullscreen Mode" for the duration of the experiment:
-        <a href="javascript:void(0)" @click="turnOnFullScreen">Fullscreen Mode</a>
-      </p>
+  <p>Vă rugăm să utilizați „Modul Ecran Complet” pe durata experimentului:
+    <a href="javascript:void(0)" @click="turnOnFullScreen">Mod Ecran Complet</a>
+  </p>
+-->
+  <p>În acest studiu, veți citi texte scurte și veți răspunde la întrebări despre ele. Totuși, spre deosebire de citirea normală, textele vor fi încețoșate. Pentru a aduce textul în claritate, mutați mouse-ul peste acesta. Acordați-vă cât timp este necesar pentru a citi și înțelege textul. După ce ați terminat de citit,apasati butonul "Done" pentru a afisa intrebarea. Răspundeți la întrebarea de jos și apăsați "Next" pentru a continua.</p>
+  <p> Va rog introduceti-va numele in casuta de mai jos</p>
+  <label for="name">Nume:</label>
+  <input type="text" id="name" name="name" v-model="userName" required>
+</InstructionScreen>
+
+
+    
+<InstructionScreen :title="'Instrucțiuni'">
+<!-- 
+  <p>Vă rugăm să utilizați „Modul Ecran Complet” pe durata experimentului:
+    <a href="javascript:void(0)" @click="turnOnFullScreen">Mod Ecran Complet</a>
+  </p>
  -->
-      <p>In this study, you will read short texts and answer questions about them. However, unlike in normal reading, the texts will be blurred. In order to bring the text into focus move your mouse over it. Take as much time to read the text as you need in order to understand it. When you are done reading, answer the question at the bottom and click “next” to move on.</p>
-    </InstructionScreen>
+  <p>În acest studiu, veți citi texte scurte și veți răspunde la întrebări despre ele. Totuși, spre deosebire de citirea normală, textele vor fi încețoșate. Pentru a aduce textul în claritate, mutați mouse-ul peste acesta. Acordați-vă cât timp este necesar pentru a citi și înțelege textul. După ce ați terminat de citit,apasati butonul "Done" pentru a afisa intrebarea. Răspundeți la întrebarea de jos și apăsați "Next" pentru a continua.</p>
+  <p> Va rog introduceti-va numele in casuta de mai jos</p>
+  <label for="name" >Nume:</label>
+  <input type="text" id="name" name="name" required>
+</InstructionScreen>
+
 
     <template v-for="(trial, i) of trials">
       <Screen :key="i" class="main_screen" :progress="i / trials.length">
         <Slide>
-          <form>
+          <!-- <form>
             <input type="hidden" class="item_id" :value="trial.item_id">
             <input type="hidden" class="experiment_id" :value="trial.experiment_id">
             <input type="hidden" class="condition_id" :value="trial.condition_id">
-          </form>
+          </form> -->
           <div class="oval-cursor"></div>
           <template>
             <div v-if="showFirstDiv" class="readingText" @mousemove="moveCursor" @mouseleave="changeBack">
-              <template v-for="(word, index) of trial.text.split(' ')">
-                <span :key="index" :data-index="index" >
-                  {{ word }}
-                </span>
-              </template>
+              <template v-for="(wordObj, index) of trial.words">
+          <span :key="index" :data-index="index" :data-sentence-index="wordObj.sentenceIndex">
+            {{ wordObj.word }}
+          </span>
+        </template>
             </div>
             <div class="blurry-layer" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s;"> 
               {{trial.text}}
@@ -120,14 +101,22 @@
                 <!-- comprehension questions and the response options -->
                 <div>{{ trial.question.replace(/ ?["]+/g, '') }}</div>
                 <template v-for='(word, index) of trial.response_options'>
-                  <input :id="'opt_'+index" type="radio" :value="word" name="opt" v-model="$magpie.measurements.response"/>{{ word }}<br/>
+                  <input 
+                  :id="'opt_'+index" 
+                  type="radio" 
+                  :value="word" 
+                  name="opt" 
+                  v-model="$magpie.measurements.response"/>{{ word }}<br/>
                     <!-- <label :for="'opt_'+index"> {{ word }}&nbsp</label> -->
                 </template>
               </form>
             </template>
           </div>
           
-          <button v-if="$magpie.measurements.response" style="transform: translate(-50%, -50%)" @click="toggleDivs(); $magpie.saveAndNextScreen()">
+          <button v-if="$magpie.measurements.response" 
+          style="transform: translate(-50%, -50%)" 
+          @click="toggleDivs(); 
+          $magpie.saveAndNextScreen()">
             Next
           </button>
         </Slide>
@@ -136,34 +125,39 @@
     <SubmitResultsScreen />
   </Experiment>
 </template>
-
 <script>
 // Load data from csv files as javascript arrays with objects
 import localCoherence_list1 from '../trials/localCoherence_list1.tsv';
-import localCoherence_list2 from '../trials/localCoherence_list2.tsv';
-import localCoherence_list3 from '../trials/localCoherence_list3.tsv';
-import localCoherence_practice from '../trials/localCoherence_practice.tsv';
 
 import _ from 'lodash';
 
 export default {
   name: 'App',
   data() {
-    const lists = [localCoherence_list1, localCoherence_list2, localCoherence_list3];
-    const chosenItems = lists[Math.floor(Math.random() * lists.length)]; // randomly choose one of the lists
-    const shuffledItems = _.shuffle(chosenItems); 
-    const trials = _.concat(localCoherence_practice, shuffledItems);
+    const lists = localCoherence_list1;
+    //const chosenItems = lists[Math.floor(Math.random() * lists.length)]; // randomly choose one of the lists
+    const shuffledItems = _.shuffle(lists); 
+    const selectedItems=_.sampleSize(shuffledItems, 3);
+    //const trials = _.concat(localCoherence_practice, shuffledItems);
     // Create a new column in localCoherences called 'response_options'
     // that concatenates the word in response_true with the two words in response_distractors
-    const updatedTrials = trials.map(trial => {
-      return {
-        ...trial,
-        response_options: _.shuffle(`${trial.response_true}|${trial.response_distractors}`.replace(/ ?["]+/g, "").split("|")),
-      }
-    });
-    return {
+    const updatedTrials = selectedItems.map((trial, trialIndex) => {
+  const words = trial.text.split(" ");
+  return {
+    ...trial,
+    response_options: _.shuffle(`${trial.response_true}|${trial.response_distractors}`.replace(/ ?["]+/g, "").split("|")),
+    TrueAnswer: trial.response_true, // Add the correct answer
+    words: words.map((word, wordIndex) => ({
+      word: word,
+      sentenceIndex: trial.index_prop, // Store the sentence index for each word
+      // wordIndex: wordIndex // Optional: Store the word index within the sentence
+      }))
+    };
+  });
+  return {
       isCursorMoving: false,
       trials: updatedTrials,
+      
       currentIndex: null,
       showFirstDiv: true,
       // currentItem: null,
@@ -188,10 +182,11 @@ export default {
           const currentElement = this.$el.querySelector(`span[data-index="${this.currentIndex}"]`);
           if (currentElement) {
             const currentElementRect = currentElement.getBoundingClientRect();
+            const sentenceIndex = currentElement.getAttribute('data-sentence-index'); // Get the sentence index
+            // Find the trial (sentence) with the matching sentence index
+            const currentTrial = this.trials.find(trial => trial.words.some(wordObj => wordObj.sentenceIndex === parseInt(sentenceIndex)));
             $magpie.addTrialData({
-              Experiment: this.$el.querySelector(".experiment_id").value,
-              Condition: this.$el.querySelector(".condition_id").value,
-              ItemId: this.$el.querySelector(".item_id").value,
+              sentenceIndex: sentenceIndex,
               Index: this.currentIndex,
               Word: currentElement.innerHTML,
               mousePositionX: this.mousePosition.x,
@@ -199,20 +194,15 @@ export default {
               wordPositionTop: currentElementRect.top,
               wordPositionLeft: currentElementRect.left,
               wordPositionBottom: currentElementRect.bottom,
-              wordPositionRight: currentElementRect.right
-              // wordPositionTop: currentElement.offsetTop,
-              // wordPositionLeft: currentElement.offsetLeft,
-              // wordPositionBottom: currentElement.offsetHeight + currentElement.offsetTop,
-              // wordPositionRight: currentElement.offsetWidth + currentElement.offsetLeft
+              wordPositionRight: currentElementRect.right,
+              TrueAnswer: currentTrial ? currentTrial.TrueAnswer : "NA", // Include the correct answer
           });
         } else {
           $magpie.addTrialData({
-              Experiment: this.$el.querySelector(".experiment_id").value,
-              Condition: this.$el.querySelector(".condition_id").value,
-              ItemId: this.$el.querySelector(".item_id").value,
               Index: this.currentIndex,
               mousePositionX: this.mousePosition.x,
               mousePositionY: this.mousePosition.y,
+              TrueAnswer: "No answer found" // Fallback if no trial is found
           });
           
         }
