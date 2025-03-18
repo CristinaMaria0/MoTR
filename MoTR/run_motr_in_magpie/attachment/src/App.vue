@@ -41,23 +41,7 @@
 </div>
 </Screen>
 
-
-  
-<InstructionScreen :title="'Instrucțiuni'">
-<!-- 
-  <p>Vă rugăm să utilizați „Modul Ecran Complet” pe durata experimentului:
-    <a href="javascript:void(0)" @click="turnOnFullScreen">Mod Ecran Complet</a>
-  </p>
--->
-  <p>În acest studiu, veți citi texte scurte și veți răspunde la întrebări despre ele. Totuși, spre deosebire de citirea normală, textele vor fi încețoșate. Pentru a aduce textul în claritate, mutați mouse-ul peste acesta. Acordați-vă cât timp este necesar pentru a citi și înțelege textul. După ce ați terminat de citit,apasati butonul "Done" pentru a afisa intrebarea. Răspundeți la întrebarea de jos și apăsați "Next" pentru a continua.</p>
-  <p> Va rog introduceti-va numele in casuta de mai jos</p>
-  <label for="name">Nume:</label>
-  <input type="text" id="name" name="name" v-model="userName" required>
-</InstructionScreen>
-
-
-    
-<InstructionScreen :title="'Instrucțiuni'">
+<Screen :title="'Instrucțiuni'">
 <!-- 
   <p>Vă rugăm să utilizați „Modul Ecran Complet” pe durata experimentului:
     <a href="javascript:void(0)" @click="turnOnFullScreen">Mod Ecran Complet</a>
@@ -66,8 +50,13 @@
   <p>În acest studiu, veți citi texte scurte și veți răspunde la întrebări despre ele. Totuși, spre deosebire de citirea normală, textele vor fi încețoșate. Pentru a aduce textul în claritate, mutați mouse-ul peste acesta. Acordați-vă cât timp este necesar pentru a citi și înțelege textul. După ce ați terminat de citit,apasati butonul "Done" pentru a afisa intrebarea. Răspundeți la întrebarea de jos și apăsați "Next" pentru a continua.</p>
   <p> Va rog introduceti-va numele in casuta de mai jos</p>
   <label for="name" >Nume:</label>
-  <input type="text" id="name" name="name" required>
-</InstructionScreen>
+  <input type="text" id="name" name="name" v-model="userName" required>
+  <p v-if="nameError" style="color: red;">Numele este obligatoriu!</p>
+  <!-- Updated Button with Validation -->
+  <button @click="validateAndContinue">
+    Continuă
+  </button>
+</Screen>
 
 
     <template v-for="(trial, i) of trials">
@@ -142,22 +131,24 @@ export default {
     // Create a new column in localCoherences called 'response_options'
     // that concatenates the word in response_true with the two words in response_distractors
     const updatedTrials = selectedItems.map((trial, trialIndex) => {
-  const words = trial.text.split(" ");
-  return {
-    ...trial,
-    response_options: _.shuffle(`${trial.response_true}|${trial.response_distractors}`.replace(/ ?["]+/g, "").split("|")),
-    TrueAnswer: trial.response_true, // Add the correct answer
-    words: words.map((word, wordIndex) => ({
-      word: word,
-      sentenceIndex: trial.index_prop, // Store the sentence index for each word
-      // wordIndex: wordIndex // Optional: Store the word index within the sentence
-      }))
-    };
-  });
+      const words = trial.text.split(" ");
+      return {
+        ...trial,
+        response_options: _.shuffle(`${trial.response_true}|${trial.response_distractors}`.replace(/ ?["]+/g, "").split("|")),
+        TrueAnswer: trial.response_true, // Add the correct answer
+        words: words.map((word, wordIndex) => ({
+          word: word,
+          sentenceIndex: trial.index_prop, // Store the sentence index for each word
+          // wordIndex: wordIndex // Optional: Store the word index within the sentence
+          }))
+        };
+      });
   return {
       isCursorMoving: false,
       trials: updatedTrials,
       
+      userName: "",
+      nameError: false,
       currentIndex: null,
       showFirstDiv: true,
       // currentItem: null,
@@ -172,6 +163,14 @@ export default {
     setInterval(this.saveData, 50);
     },
   methods: {
+    validateAndContinue() {
+    if (!this.userName.trim()) {
+      this.nameError = true; // Show error message if name is empty
+    } else {
+      this.nameError = false;
+      this.$magpie.nextScreen(); // ✅ Move to the next screen
+    }
+  },
     changeBack() {
       this.$el.querySelector(".oval-cursor").classList.remove('grow');
       this.$el.querySelector(".oval-cursor").classList.remove('blank');
