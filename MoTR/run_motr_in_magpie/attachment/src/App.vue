@@ -111,7 +111,7 @@
         </Slide>
       </Screen>
     </template>
-    <SubmitResultsScreen />
+    <SubmitResultsScreen /> 
   </Experiment>
 </template>
 <script>
@@ -126,10 +126,9 @@ export default {
     const lists = localCoherence_list1;
     //const chosenItems = lists[Math.floor(Math.random() * lists.length)]; // randomly choose one of the lists
     const shuffledItems = _.shuffle(lists); 
-    const selectedItems=_.sampleSize(shuffledItems, 3);
-    //const trials = _.concat(localCoherence_practice, shuffledItems);
-    // Create a new column in localCoherences called 'response_options'
-    // that concatenates the word in response_true with the two words in response_distractors
+    const selectedItems=_.sampleSize(shuffledItems, 10);
+    //const selectedItems = chosenItems
+    
     const updatedTrials = selectedItems.map((trial, trialIndex) => {
       const words = trial.text.split(" ");
       return {
@@ -194,14 +193,20 @@ export default {
               wordPositionLeft: currentElementRect.left,
               wordPositionBottom: currentElementRect.bottom,
               wordPositionRight: currentElementRect.right,
-              TrueAnswer: currentTrial ? currentTrial.TrueAnswer : "NA", // Include the correct answer
+              // TrueAnswer: currentTrial ? currentTrial.TrueAnswer : "NA", // Include the correct answer
+              TrueAnswer:currentTrial.TrueAnswer, // Include the correct answer
+              userName: this.userName,  // ✅ Add participant name
+
           });
         } else {
           $magpie.addTrialData({
+              sentenceIndex: sentenceIndex,
               Index: this.currentIndex,
               mousePositionX: this.mousePosition.x,
               mousePositionY: this.mousePosition.y,
-              TrueAnswer: "No answer found" // Fallback if no trial is found
+              TrueAnswer: "No answer found", // Fallback if no trial is found
+              userName: this.userName,  // ✅ Ensure name is always recorded
+
           });
           
         }
@@ -232,6 +237,34 @@ export default {
       // this.mousePosition.x = e.offsetX;
       // this.mousePosition.y = e.offsetY;
     },
+    // downloadCSV() {
+    //   if (!$magpie.measurements || $magpie.measurements.length === 0) {
+    //     alert("No data to download.");
+    //     return;
+    //   }
+
+    //   // Convert user’s name to a valid filename
+    //   let fileName = this.userName.trim().replace(/\s+/g, "_") || "experiment";
+
+    //   // Define CSV Headers
+    //   let csvContent =
+    //     "data:text/csv;charset=utf-8," 
+    //     // "mousePositionX,mousePositionY,TrueAnswer,sentenceIndex,Word,wordPositionTop,wordPositionLeft,wordPositionBottom,wordPositionRight,response,experiment_start_time,experiment_end_time,experiment_duration\n";
+
+    //   // Iterate through measurements and append them as CSV rows
+    //   $magpie.measurements.forEach((row) => {
+    //     csvContent += `${row.mousePositionX || "NA"},${row.mousePositionY || "NA"},${row.TrueAnswer || "NA"},${row.sentenceIndex || "NA"},${row.Word || "NA"},${row.wordPositionTop || "NA"},${row.wordPositionLeft || "NA"},${row.wordPositionBottom || "NA"},${row.wordPositionRight || "NA"},${row.response || "NA"},${row.experiment_start_time || "NA"},${row.experiment_end_time || "NA"},${row.experiment_duration || "NA"}\n`;
+    //   });
+
+    //   // Encode and trigger download
+    //   const encodedUri = encodeURI(csvContent);
+    //   const link = document.createElement("a");
+    //   link.setAttribute("href", encodedUri);
+    //   link.setAttribute("download", `${fileName}.csv`);
+    //   document.body.appendChild(link);
+    //   link.click();
+    //   document.body.removeChild(link);
+    // },
     toggleDivs() {
     this.showFirstDiv = !this.showFirstDiv;
     this.isCursorMoving = false;
