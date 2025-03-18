@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lint:style": "vue-cli-service lint:style"
+    "lint:style": "vue-cli-service lint:style",
+    "start": "npx serve -s dist -l 3000",
+    "test": "echo \"Error\" && exit 1"
   },
   "devDependencies": {
     "@samhammer/vue-cli-plugin-stylelint": "~2.1.0",
