@@ -10,8 +10,8 @@ label_mapping = {
     'nu cunosc': 5
 }
 
-# Lista de useri (coloanele suplimentare)
-users = ['iulia', 'petru', 'sergiu', 'stadio88', 'user', 'victor']
+# Folderul unde se află fișierele
+folder_path = 'adnotari_complexitate'
 
 # Funcție pentru a elimina spațiile din cheie
 def create_key(propozitie, cuvant):
@@ -20,23 +20,29 @@ def create_key(propozitie, cuvant):
 # Dicționar pentru a stoca datele
 data = {}
 
-# Citim fișierele CSV și populăm dicționarul
-for user in users:
-    file_name = f"adnotari_complexitate\/{user}.csv"
+# Set pentru a colecta toți utilizatorii
+all_users = set()
 
-    if os.path.exists(file_name):
-        with open(file_name, mode='r', encoding='utf-8') as file:
+# Listăm toate fișierele din folder
+for file_name in os.listdir(folder_path):
+    if file_name.endswith('.csv'):  # Ne asigurăm că este un fișier CSV
+        user = file_name.replace('.csv', '')  # Extragem numele utilizatorului din numele fișierului
+        all_users.add(user)  # Adăugăm utilizatorul la set
+        file_path = os.path.join(folder_path, file_name)
+        
+        with open(file_path, mode='r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
             for row in reader:
                 key = create_key(row['text'], row['word'])
                 if key not in data:
                     data[key] = {'propozitie': row['text'], 'cuvant': row['word']}
-                data[key][user] = label_mapping.get(row['label'], 0)  # Default la 0 dacă labelul nu este găsit
+                data[key][user] = label_mapping.get(row['label'], 5)  # Default la 5 dacă labelul nu este găsit
 
 # Scriem datele într-un nou fișier CSV
 output_file = 'individual_scores.csv'
 with open(output_file, mode='w', encoding='utf-8', newline='') as file:
-    fieldnames = ['propozitie', 'cuvant'] + users
+    # Definim coloanele: propozitie, cuvant + toți utilizatorii
+    fieldnames = ['propozitie', 'cuvant'] + list(all_users)
     writer = csv.DictWriter(file, fieldnames=fieldnames)
     
     writer.writeheader()
